@@ -38,4 +38,4 @@ A surface a mod creates by script, with no planet prototype behind it, is left
 out too — Space Exploration's zones, Subsurface's underground layers,
 Factorissimo's factory interiors. A mod that adds a planet the Space Age way is
 listed like any other planet. See
-[issue #162](https://github.com/sakuro/quidquid/issues/162).
+[issue #4](https://github.com/sakuro/quidquid-surfaces/issues/4).
