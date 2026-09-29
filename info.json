@@ -1,11 +1,13 @@
 {
   "name": "quidquid-surfaces",
   "version": "0.0.1",
-  "title": "Quidquid Surfaces",
+  "title": "Quidquid: Surfaces",
   "author": "sakuro",
-  "description": "Quidquid Surfaces",
+  "description": "Adds planet and space-platform search to the Quidquid palette, with remote view and Factoriopedia actions.",
   "factorio_version": "2.1",
   "dependencies": [
-    "base >= 2.1"
+    "base >= 2.1",
+    "quidquid >= 0.11.0",
+    "flib"
   ]
 }
