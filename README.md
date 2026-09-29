@@ -7,8 +7,13 @@ Adds planet and space-platform search to the
 Quidquid in 0.11.0. Type `surface ` or `s ` to search surfaces only.
 
 Search for planets and space platforms available to your force. A platform
-owned by another force is listed with that force's name. Hidden planets are
-listed only when Quidquid's "Include hidden entries" setting is on.
+owned by another force is listed with that force's name.
+
+Planets your force has not unlocked yet are listed too: remote view says they
+are not unlocked, and Factoriopedia still opens them. Quidquid's "Include
+hidden entries" setting does not affect this. It only covers planets and
+platforms that the game or a mod marks as hidden, and no base-game or Space
+Age planet is.
 
 | Key | Action |
 | --- | --- |
