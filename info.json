@@ -1,0 +1,11 @@
+{
+  "name": "quidquid-surfaces",
+  "version": "0.0.1",
+  "title": "Quidquid Surfaces",
+  "author": "sakuro",
+  "description": "Quidquid Surfaces",
+  "factorio_version": "2.1",
+  "dependencies": [
+    "base >= 2.1"
+  ]
+}
