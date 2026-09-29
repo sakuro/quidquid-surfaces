@@ -1,77 +1,16 @@
 -- Quidquid's public API cannot load under busted, and this spec tests the extension's
--- own logic, not Quidquid's; Quidquid specs its own matcher and rich-text helpers. The
--- mock matcher matches by plain case-insensitive substring and returns ranges only for
--- the field that won -- the same simplification quidquid-resources' spec/resource_logic_spec.lua
--- uses, mirroring the real Matcher:match, which never hands back ranges for the loser.
--- rich_text is a pass-through, as quidquid-blueprints' spec/blueprint_logic_spec.lua uses:
--- it does not strip tags or produce per-character ranges the way the real module does, so
--- a range it returns only proves SurfaceLogic routed the name through it, not the exact
--- highlighted bytes.
-package.preload["__quidquid__.lib.api"] = function()
-  local Matcher = {}
-  Matcher.__index = Matcher
-
-  local function ranges_of(query, value)
-    if type(value) ~= "string" or query == "" then
-      return nil
-    end
-    local start_byte, end_byte = value:lower():find(query:lower(), 1, true)
-    if start_byte == nil then
-      return nil
-    end
-    return { { start_byte = start_byte, end_byte = end_byte } }
-  end
-
-  function Matcher:match(_namespace, _id, fields)
-    local display = ranges_of(self.query, fields.display)
-    local internal = ranges_of(self.query, fields.internal)
-    if display == nil and internal == nil then
-      return nil
-    end
-    if display ~= nil then
-      return { score = 1, display_ranges = display, internal_ranges = {} }
-    end
-    return { score = 1, display_ranges = {}, internal_ranges = internal }
-  end
-
-  return {
-    matcher = function(query, _locale)
-      return setmetatable({ query = query }, Matcher)
-    end,
-    rich_text = {
-      searchable = function(value)
-        local origins = {}
-        for i = 1, #value do
-          origins[i] = i
-        end
-        return value, origins
-      end,
-      map_ranges = function(ranges, _origins)
-        local mapped = {}
-        for _, range in ipairs(ranges or {}) do
-          table.insert(mapped, { start_byte = range.start_byte, end_byte = range.end_byte, mapped = true })
-        end
-        return mapped
-      end,
-    },
-    run_action = function(candidate, player_index, resolve_fn, apply_fn, fallback_locale_key)
-      local player = game.get_player(player_index)
-      if player == nil then
-        return nil
-      end
-      local payload, locale_key = resolve_fn(candidate, player)
-      if payload == nil then
-        local key = locale_key or fallback_locale_key
-        return key ~= nil and { key } or nil
-      end
-      return apply_fn(payload, candidate, player)
-    end,
-  }
-end
+-- own logic, not Quidquid's; Quidquid specs its own matcher and rich-text helpers.
+-- See spec/support/quidquid_api.lua for the mock's shape and why it must be required
+-- before any lib.* module.
+local quidquid_api = require("spec.support.quidquid_api")
 
 local SurfaceLogic = require("lib.surface_logic")
 
 describe("SurfaceLogic", function()
+  before_each(function()
+    quidquid_api.reset()
+  end)
+
   local function planet(overrides)
     local value = {
       kind = "planet",
@@ -256,6 +195,17 @@ describe("SurfaceLogic", function()
       assert.is_true(range.mapped)
     end
     assert.are.same({}, candidates[1].search_internal_ranges)
+  end)
+
+  it("does not route a planet's display name through rich_text -- only platforms are", function()
+    local candidates = SurfaceLogic.build_candidates("ヴィス", { planet() }, false)
+    local ranges = candidates[1].search_display_ranges
+
+    assert.is_true(#ranges > 0)
+    for _, range in ipairs(ranges) do
+      assert.is_nil(range.mapped)
+    end
+    assert.are.same({}, quidquid_api.calls.searchable)
   end)
 
   it("does not match a platform by its surface name", function()

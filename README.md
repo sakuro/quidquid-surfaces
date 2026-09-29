@@ -7,7 +7,8 @@ Adds planet and space-platform search to the
 Quidquid in 0.11.0. Type `surface ` or `s ` to search surfaces only.
 
 Search for planets and space platforms available to your force. A platform
-owned by another force is listed with that force's name.
+owned by another force is listed with that force's name. Hidden planets are
+listed only when Quidquid's "Include hidden entries" setting is on.
 
 | Key | Action |
 | --- | --- |

@@ -1,33 +1,8 @@
--- Quidquid's public API cannot load under busted, and lib.factoriopedia_action requires
--- it at load, even though these tests only call .resolve_prototype and never reach
--- api.run_action; a table with the shape the module expects is enough.
-package.preload["__quidquid__.lib.api"] = function()
-  return {
-    matcher = function(query, _locale)
-      return { query = query }
-    end,
-    rich_text = {
-      searchable = function(value)
-        return value, {}
-      end,
-      map_ranges = function(_ranges, _origins)
-        return {}
-      end,
-    },
-    run_action = function(candidate, player_index, resolve_fn, apply_fn, fallback_locale_key)
-      local player = game.get_player(player_index)
-      if player == nil then
-        return nil
-      end
-      local payload, locale_key = resolve_fn(candidate, player)
-      if payload == nil then
-        local key = locale_key or fallback_locale_key
-        return key ~= nil and { key } or nil
-      end
-      return apply_fn(payload, candidate, player)
-    end,
-  }
-end
+-- lib.factoriopedia_action requires __quidquid__.lib.api at load, even though these
+-- tests only call .resolve_prototype and never reach api.run_action; the shared mock
+-- covers it. See spec/support/quidquid_api.lua for why it must be required before any
+-- lib.* module.
+require("spec.support.quidquid_api")
 
 local FactoriopediaAction = require("lib.factoriopedia_action")
 local SurfaceAccess = require("lib.surface_access")
