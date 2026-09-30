@@ -59,7 +59,7 @@ local function install()
 
   package.preload["__quidquid__.lib.api"] = function()
     return {
-      matcher = function(query, _locale)
+      matcher = function(query)
         return setmetatable({ query = query }, Matcher)
       end,
       rich_text = {

@@ -66,12 +66,7 @@ local function search(query, player_index)
       end
     end
   end
-  return SurfaceLogic.build_candidates(
-    query,
-    surfaces,
-    player.mod_settings["quidquid-include-hidden"].value,
-    player.locale
-  )
+  return SurfaceLogic.build_candidates(query, surfaces, player.mod_settings["quidquid-include-hidden"].value)
 end
 
 --- Adds this source's remote interface, named by its declaration in prototypes/sources.lua.
