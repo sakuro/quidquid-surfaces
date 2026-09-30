@@ -48,11 +48,10 @@ end
 ---@param query string
 ---@param descriptors table  array of plain-value surface descriptors
 ---@param include_hidden boolean
----@param locale string|nil  the player's locale, for display-name normalization
 ---@return table  candidates, sorted by id; see EXTENDING.md "Candidates"
-function SurfaceLogic.build_candidates(query, descriptors, include_hidden, locale)
+function SurfaceLogic.build_candidates(query, descriptors, include_hidden)
   local candidates = {}
-  local matcher = api.matcher(query, locale)
+  local matcher = api.matcher(query)
   for _, descriptor in ipairs(descriptors) do
     -- A platform's name is player-written and often names things through rich text
     -- tags, so it is matched in its searchable form: tag contents are searchable
