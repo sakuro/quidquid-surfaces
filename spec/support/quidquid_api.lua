@@ -5,13 +5,13 @@
 -- whichever mock installed first stays loaded for every spec file after it. Before
 -- this module existed, spec/factoriopedia_action_spec.lua and
 -- spec/surface_logic_spec.lua each installed their own, different mock, and the
--- second file to run saw lib.surface_logic still bound to the first file's mock --
--- surfacing as "attempt to call method 'match' (a nil value)" when its matcher
+-- second file to run saw lib.surface_logic still bound to the first file's mock,
+-- which failed with "attempt to call method 'match' (a nil value)" when its matcher
 -- shape didn't match.
 --
 -- The mock matcher matches by plain case-insensitive substring and returns ranges
--- only for the field that won -- the same simplification quidquid-resources' spec/
--- resource_logic_spec.lua uses, mirroring the real Matcher:match, which never hands
+-- only for the field that won. quidquid-resources' spec/resource_logic_spec.lua
+-- makes the same simplification, mirroring the real Matcher:match, which never hands
 -- back ranges for the loser. rich_text.searchable is a pass-through, as quidquid-
 -- blueprints' spec/blueprint_logic_spec.lua uses: it does not strip tags or produce
 -- per-character ranges the way the real module does, so a range it returns only

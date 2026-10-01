@@ -20,7 +20,7 @@ end
 ---
 --- "Not unlocked" is checked before "not visited": a locked planet is necessarily
 --- unvisited too, and not being unlocked is the more actionable reason to report.
---- An invisible surface gets no locale key at all -- it shouldn't be reachable from
+--- An invisible surface gets no locale key at all: it shouldn't be reachable from
 --- a search result in the first place, so it isn't worth a message.
 ---@param descriptor table  { kind, unlocked, generated, ... }
 ---@param include_hidden boolean
@@ -88,8 +88,8 @@ function SurfaceLogic.build_candidates(query, descriptors, include_hidden)
   end
   -- This order only ever surfaces as a tiebreak: Quidquid merges every source's
   -- candidates and re-sorts them all by search_score (see EXTENDING.md "Sources").
-  -- Every id is a unique string -- a surface's name, or an ungenerated planet's --
-  -- so a plain comparison suffices.
+  -- Every id is a unique string (a surface's name, or an ungenerated planet's), so a
+  -- plain comparison suffices.
   table.sort(candidates, function(a, b)
     return a.id < b.id
   end)

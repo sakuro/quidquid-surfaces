@@ -31,9 +31,8 @@ function SurfaceAccess.describe(surface, player)
   if planet ~= nil then
     local descriptor = SurfaceAccess.describe_planet(planet, player)
     -- A planet's generated surface is always named after the planet
-    -- (confirmed empirically via RCON), so this is a no-op in value -- but
-    -- it comes from the actual LuaSurface in hand rather than relying on
-    -- that invariant.
+    -- (confirmed empirically via RCON), so the value is the same either way;
+    -- reading it from the LuaSurface in hand avoids relying on that invariant.
     descriptor.id = surface.name
     descriptor.name = surface.name
     descriptor.generated = true
