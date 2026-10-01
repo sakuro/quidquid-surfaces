@@ -34,8 +34,8 @@ as `[item=space-science-pack]`, is searchable by what it shows
 (`space-science-pack`) but never highlighted. Space locations such as Solar
 System Edge are not surfaces and are not included.
 
-A surface a mod creates by script, with no planet prototype behind it, is left
-out too — Space Exploration's zones, Subsurface's underground layers,
-Factorissimo's factory interiors. A mod that adds a planet the Space Age way is
-listed like any other planet. See
+Surfaces that a mod creates by script, with no planet prototype behind them,
+are left out too, such as Space Exploration's zones, Subsurface's underground
+layers and Factorissimo's factory interiors. A planet added by a mod the Space
+Age way is listed like any other planet. See
 [issue #4](https://github.com/sakuro/quidquid-surfaces/issues/4).

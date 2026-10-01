@@ -19,7 +19,7 @@ end
 ---
 --- Prototype names are translated, not the dynamic list of generated surfaces, so a
 --- newly generated planet is searchable immediately off the existing cache. Must run
---- from on_init/on_configuration_changed, before the first on_tick -- see control.lua
+--- from on_init/on_configuration_changed, before the first on_tick; see control.lua
 --- and EXTENDING.md "Translated names".
 function SurfaceSource.register_dictionary()
   flib_dictionary.new(NAMESPACE)

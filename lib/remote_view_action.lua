@@ -59,16 +59,16 @@ local function resolve(candidate, player)
 end
 
 -- is_available only gates by candidate type (via this action's registered `types`);
--- whether remote view actually works for this specific surface (generated, unlocked
--- -- see README) is a per-candidate runtime fact, so it's resolved here and reported
--- by execute, not hidden from the tooltip.
+-- whether remote view works for this specific surface (generated and unlocked; see
+-- README) is a per-candidate runtime fact, so it's resolved here and reported by
+-- execute instead of being hidden from the tooltip.
 local function execute(candidate, player_index)
   return api.run_action(candidate, player_index, resolve, function(target, _candidate, player)
     remember(player)
     player.set_controller({ type = defines.controllers.remote, surface = target.surface, position = target.position })
-    -- Recorded again after landing, at the jump's own destination -- so a later plain
-    -- surface jump back to this surface picks up from here, not from wherever the
-    -- player was before.
+    -- Recorded again after landing, at the jump's own destination, so a later plain
+    -- surface jump back to this surface picks up from here instead of from wherever
+    -- the player was before.
     remember(player)
   end, "quidquid-surfaces.action-open-remote-view-unavailable")
 end
