@@ -3,8 +3,7 @@
 [![Downloads](https://img.shields.io/badge/dynamic/json.svg?label=Downloads&url=https%3A%2F%2Fmods.factorio.com%2Fapi%2Fmods%2Fquidquid-surfaces&query=%24.downloads_count)](https://mods.factorio.com/mod/quidquid-surfaces)
 
 Adds planet and space-platform search to the
-[Quidquid](https://mods.factorio.com/mod/quidquid) palette. It moved out of
-Quidquid in 0.11.0.
+[Quidquid](https://mods.factorio.com/mod/quidquid) palette.
 
 By default, planets and space platforms appear in the palette's search along
 with everything else. Type `s ` or `surface ` to restrict the search to them.
