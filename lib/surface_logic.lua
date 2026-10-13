@@ -7,6 +7,9 @@ local SurfaceLogic = {}
 --- A planet always qualifies; a platform only if it is the force's own or a
 --- friendly one. Descriptors carry plain values only, extracted by the caller for
 --- the current player's force.
+---
+--- Unlock state plays no part: include_hidden covers only the hidden flag the game
+--- or a mod sets, so a locked planet is still listed and can explain itself.
 ---@param descriptor table  { kind, own, friendly, hidden, ... }
 ---@param include_hidden boolean  the player's include-hidden setting
 ---@return boolean
@@ -30,8 +33,6 @@ function SurfaceLogic.remote_view_availability(descriptor, include_hidden)
   if not SurfaceLogic.is_visible(descriptor, include_hidden) then
     return false, nil
   end
-  -- Checked before "not visited": a locked planet is necessarily unvisited too,
-  -- and "not unlocked" is the more actionable reason to report.
   if descriptor.kind == "planet" and descriptor.unlocked ~= true then
     return false, "quidquid-surfaces.action-open-remote-view-not-unlocked"
   end
