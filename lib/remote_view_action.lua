@@ -59,9 +59,9 @@ local function resolve(candidate, player)
 end
 
 -- is_available only gates by candidate type (via this action's registered `types`);
--- whether remote view works for this specific surface (generated and unlocked; see
--- README) is a per-candidate runtime fact, so it's resolved here and reported by
--- execute instead of being hidden from the tooltip.
+-- whether remote view works for this specific surface (see
+-- SurfaceLogic.remote_view_availability) is a per-candidate runtime fact, so it's
+-- resolved here and reported by execute instead of being hidden from the tooltip.
 local function execute(candidate, player_index)
   return api.run_action(candidate, player_index, resolve, function(target, _candidate, player)
     remember(player)

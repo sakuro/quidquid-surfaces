@@ -23,6 +23,7 @@ function SurfaceAccess.describe(surface, player)
       icon = "surface/space-platform",
       force_name = owner.name,
       own = owner == player.force,
+      -- The owner's view of the player's force: sharing a platform is the owner's call.
       friendly = owner.get_friend(player.force),
       hidden = platform.hidden or player.force.get_surface_hidden(surface),
     }
@@ -39,6 +40,8 @@ function SurfaceAccess.describe(surface, player)
     descriptor.hidden = planet.prototype.hidden or player.force.get_surface_hidden(surface)
     return descriptor
   end
+  -- A surface created by script has no planet prototype behind it, so there is no
+  -- icon, Factoriopedia page or unlock state to offer (issue #4).
   return nil
 end
 
