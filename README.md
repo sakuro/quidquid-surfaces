@@ -7,7 +7,7 @@ Adds planet and space-platform search to the [Quidquid](https://mods.factorio.co
 By default, planets and space platforms appear in the palette's search along with everything else. Type `s ` or `surface ` to restrict the search to them.
 Turning off "Include surfaces in the default search" leaves them to the restricted search only.
 
-Search for planets and space platforms available to your force. A platform owned by another force is listed with that force's name. Planets your force has not unlocked yet are listed too, and Factoriopedia still opens them.
+Search for planets and space platforms available to your force. A space platform is listed when your force owns it or when its owner considers your force a friend, and one owned by another force is listed with that force's name. Planets your force has not unlocked yet are listed too, and Factoriopedia still opens them.
 
 | Key | Action |
 | --- | --- |
